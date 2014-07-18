@@ -1,7 +1,15 @@
-Cearch
-======
+CearchPro
+=========
 
-Enhanced search algorithm and functions for Contao Open Source CMS
+* Enhances the default Contao search
+* Allows typing errors and shows alternate words
+* Uses the levensthein algorithm 
+* Shows "Did you mean.." on search results page
+* Transliterates all special characters for example "o" = "ö", "ê" = "e"
+* SearchIndexer now also indexes OpenGraph image tags.
+* SearchIndexer saves transliterated Version of all words
+* Shows thumbnail for each search result
+
 
 ------
 
