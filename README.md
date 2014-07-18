@@ -15,12 +15,14 @@ CearchPro
 **Works on:**
 Contao > 3.1.5
 
+
 **Tested on:**
 Contao 3.1.5, Contao 3.3.3
 
+
 **HowTo:**
-Copy "zCearchPro" Folder to /system/modules/
-Enable CearchPro in Contao search engine module
+* Copy "zCearchPro" Folder to /system/modules/
+* Enable CearchPro in Contao search engine module
 
 ------
 
