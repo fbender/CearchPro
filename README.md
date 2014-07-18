@@ -2,13 +2,15 @@ CearchPro
 =========
 
 * Enhances the default Contao search
-* Allows typing errors and shows alternate words
 * Uses the levensthein algorithm 
+* Ignores typing errors by showing alternate words e.g "Mannnheim" shows "Mannheim", "Räferenzn" shows "Referenzen"
 * Shows "Did you mean.." on search results page
 * Transliterates all special characters for example "o" = "ö", "ê" = "e"
 * SearchIndexer now also indexes OpenGraph image tags.
 * SearchIndexer saves transliterated Version of all words
 * Shows thumbnail for each search result
+
+
 
 
 ------
