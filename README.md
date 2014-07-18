@@ -6,12 +6,21 @@ CearchPro
 * Ignores typing errors by showing alternate words e.g "Mannnheim" shows "Mannheim", "Räferenzn" shows "Referenzen"
 * Shows "Did you mean..." on search results page
 * Transliterates all special characters for example "o" = "ö", "ê" = "e"
+* Added word stoplists for german and english to provide better search results 
 * SearchIndexer now also indexes OpenGraph image tags.
 * SearchIndexer saves transliterated Version of all words
 * Shows thumbnail for each search result
 
 
+Works on:
+Contao > 3.1.5
 
+Tested on;
+Contao 3.1.5, Contao 3.3.3
+
+HowTo:
+Copy "zCearchPro" Folder to /system/modules/
+Enable CearchPro in Contao search engine module
 
 ------
 
