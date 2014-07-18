@@ -12,13 +12,13 @@ CearchPro
 * Shows thumbnail for each search result
 
 
-Works on:
+**Works on:**
 Contao > 3.1.5
 
-Tested on;
+**Tested on:**
 Contao 3.1.5, Contao 3.3.3
 
-HowTo:
+**HowTo:**
 Copy "zCearchPro" Folder to /system/modules/
 Enable CearchPro in Contao search engine module
 
