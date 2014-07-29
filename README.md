@@ -22,6 +22,7 @@ Contao 3.1.5, Contao 3.3.3
 
 **HowTo:**
 * Extract all files to /system/modules/zCearchPro/
+* Update Database in Contao Extension Manager
 * Enable CearchPro in Contao search engine module
 * Rebuild Search Index
 
