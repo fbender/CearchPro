@@ -2,7 +2,7 @@ CearchPro
 =========
 
 * Enhances the default Contao search
-* Uses the [Levensthein algorithm](http://en.wikipedia.org/wiki/Levenshtein_distance)
+* Uses the [Levenshtein algorithm](http://en.wikipedia.org/wiki/Levenshtein_distance)
 * Ignores typing errors by showing alternate words e.g "Mannnheim" shows "Mannheim", "Räferenzn" shows "Referenzen"
 * Shows "Did you mean..." on search results page
 * Transliterates all special characters for example "o" = "ö", "ê" = "e"
