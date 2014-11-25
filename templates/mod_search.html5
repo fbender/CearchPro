@@ -1,0 +1,31 @@
+<!-- indexer::stop -->
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+<?php echo $this->form; ?>
+<?php if ($this->header): ?>
+
+<p class="header"><?php echo $this->header; ?> (<?php echo $this->duration; ?>)</p>
+<?php endif; ?>
+<?php echo $this->results . $this->pagination; ?>
+
+<?php if (! empty($this->moreResults) ): ?>
+  <?php $url = strtok($this->Environment->url.$this->Environment->requestUri,'?');?>
+  <div class="info" style="margin-top:50px;">
+	  <p style="font-size:24px;">Meinten Sie vielleicht:</p>
+	      <?php foreach ( $this->moreResults as $result ): ?>
+			  <?php if ( is_array( $result ) ): ?>
+				  <?php foreach ( $result as $resInner ): ?>
+					  <a href="<?php echo $url ?>?keywords=<?php echo $resInner['trans']; ?>"><?php echo $resInner['org']; ?></a>&nbsp;
+				  <?php endforeach ?>
+			  <?php else: ?>
+				  <a href="<?php echo $url ?>?keywords=<?php echo $resInner['trans']; ?>"><?php echo $resInner['org']; ?></a>&nbsp;
+			  <?php endif ?>
+		  <?php endforeach ?>
+  </div>
+<?php endif ?>
+
+</div>
+<!-- indexer::continue -->
