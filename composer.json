@@ -32,7 +32,7 @@
     "extra":{
         "contao": {
             "sources":{
-                "": "system/modules/CearchPro"
+                "": "system/modules/zCearchPro"
             }
         }
     },
