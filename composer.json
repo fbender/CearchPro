@@ -1,6 +1,6 @@
 {
     "name":"feedbackmedia/contao-cearch-pro",
-    "description":"Enhances the default Contao search by using the Levensthein algorithm",
+    "description":"Enhances the default Contao search by using the Levenshtein algorithm",
     "keywords":["contao", "search", "cearch", "search engine", "engine"],
     "type":"contao-module",
     "homepage":"http://feedbackmedia.de",
