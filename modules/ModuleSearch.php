@@ -104,63 +104,63 @@ class ModuleSearch extends \Module
 
         $this->Template->form = $objFormTemplate->parse();
         $this->Template->pagination = '';
-        $this->Template->results = '';
+                    $this->Template->results = '';
 
-        // Execute the search if there are keywords
-        if ($strKeywords != '' && $strKeywords != '*')
-        {
-           $arrRootpages = deserialize($this->rootPages);
+                    // Execute the search if there are keywords
+                    if ($strKeywords != '' && $strKeywords != '*')
+                    {
+                        $arrRootpages = deserialize($this->rootPages);
 
-            // Reference page
-            if (count($arrRootpages) > 0)
-            {
-                $intRootId = $this->rootPage;
-                $arrPages = $this->Database->getChildRecords($arrRootpages, 'tl_page');
-                array_unshift($arrPages, $this->rootPage);
-            }
-            // Website root
-            else
-            {
-                global $objPage;
-                $intRootId = $objPage->rootId;
-                $arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
-            }
+                        // Reference page
+                        if (count($arrRootpages) > 0)
+                        {
+                            $intRootId = $this->rootPage;
+                            $arrPages = $this->Database->getChildRecords($arrRootpages, 'tl_page');
+                            array_unshift($arrPages, $this->rootPage);
+                        }
+                        // Website root
+                        else
+                        {
+                            global $objPage;
+                            $intRootId = $objPage->rootId;
+                            $arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
+                        }
 
-            // Return if there are no pages
-            if (!is_array($arrPages) || empty($arrPages))
-            {
-                $this->log('No searchable pages found', 'ModuleSearch compile()', TL_ERROR);
-                return;
-            }
+                        // Return if there are no pages
+                        if (!is_array($arrPages) || empty($arrPages))
+                        {
+                            $this->log('No searchable pages found', 'ModuleSearch compile()', TL_ERROR);
+                            return;
+                        }
 
-            $arrResult = null;
-            $strChecksum = md5($strKeywords.\Input::get('query_type').implode('', $arrRootpages).$this->fuzzy);
-            $query_starttime = microtime(true);
-            $strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
+                        $arrResult = null;
+                        $strChecksum = md5($strKeywords.\Input::get('query_type').implode('', $arrRootpages).$this->fuzzy);
+                        $query_starttime = microtime(true);
+                        $strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
-            // Load the cached result
-            if (file_exists(TL_ROOT . '/' . $strCacheFile))
-            {
-                $objFile = new \File($strCacheFile, true);
+                        // Load the cached result
+                        if (file_exists(TL_ROOT . '/' . $strCacheFile))
+                        {
+                            $objFile = new \File($strCacheFile, true);
 
-                if ($objFile->mtime > time() - 1800)
-                {
-                    $result = json_decode($objFile->getContent(), true);
-                    $arrResult = $result['exact'];
-                }
-                else
-                {
-                    $objFile->delete();
-                }
-            }
+                            if ($objFile->mtime > time() - 1800)
+                            {
+                                $result = json_decode($objFile->getContent(), true);
+                                $arrResult = $result['exact'];
+                            }
+                            else
+                            {
+                                $objFile->delete();
+                            }
+                        }
 
-            // Cache the result
-            if ($arrResult === null)
-            {
-                try
-                {
-                    $result = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy, $this->levensthein, $this->maxDist, $this->search_global);
-                    if($result['exact']) $arrResult = $result['exact'] = $result['exact']->fetchAllAssoc();
+                        // Cache the result
+                        if ($arrResult === null)
+                        {
+                            try
+                            {
+                                $result = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy, $this->levensthein, $this->maxDist, $this->search_global);
+                                $arrResult =  isset($result['exact']) ? $result['exact'] = $result['exact']->fetchAllAssoc() : array();
                 }
                 catch (\Exception $e)
                 {
