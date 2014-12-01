@@ -55,7 +55,7 @@ class Search
 	{
 		$objDatabase = \Database::getInstance();
 
-		$arrSet['url'] = $arrData['url'];
+		$arrSet['url'] = 'http://'.$GLOBALS['objPage']->domain.'/'.$arrData['url'];
 		$arrSet['title'] = $arrData['title'];
 		$arrSet['protected'] = $arrData['protected'];
 		$arrSet['filesize'] = $arrData['filesize'];
@@ -340,7 +340,7 @@ class Search
 	 */
 
 	//Feedback: Steffen: Add Parameters for Levensthein
-	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false, $levensthein=false, $maxDist=2, $search_global)
+	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false, $levensthein=false, $maxDist=2)
 	{
 		// Clean the keywords
 		$strKeywords = utf8_strtolower($strKeywords);
@@ -367,7 +367,7 @@ class Search
 
 		//Feedback: Steffen: Use own implementation for Levensthein
 		if($levensthein){
-			return self::levensthein($arrChunks, $arrPid, $intRows, $intOffset, $maxDist, $search_global);
+			return self::levensthein($arrChunks, $arrPid, $intRows, $intOffset, $maxDist);
 		}
 
 		$arrPhrases = array();
@@ -586,12 +586,12 @@ class Search
 	}
 
 	//Feedback: Steffen: Use own implementation for Levensthein
-	public static function levensthein($arrChunks, $arrPid, $intRows, $intOffset, $maxDist, $search_global){
+	public static function levensthein($arrChunks, $arrPid, $intRows, $intOffset, $maxDist){
 
 		$exactresults = array();
 		$moreresults = array();
 
-		self::searchIndex($arrChunks[0], $maxDist, $exactresults, $moreresults, $search_global);
+		self::searchIndex($arrChunks[0], $maxDist, $exactresults, $moreresults);
 
 		//If no 100% Results found, Return only More Results otherwise continue
 		if(! empty($exactresults)) $arrKeywords = $exactresults;
@@ -645,7 +645,7 @@ class Search
 		return array('exact' => $objResultStmt->execute($arrValues), 'more' => $moreresults);
 	}
 
-	public static function searchIndex($arrChunks, $maxDist, &$exactresults, &$moreresults, $search_global){
+	public static function searchIndex($arrChunks, $maxDist, &$exactresults, &$moreresults){
 
 		$minResLen = 2;
 
@@ -657,8 +657,7 @@ class Search
 			$maxLen = $wordlength+$maxDist;
 
 			$db = \Contao\Database::getInstance();
-			/* $res = $db->query('SELECT DISTINCT word_transliterated, word FROM tl_search_index WHERE length(word_transliterated) BETWEEN '.$minLen.' AND '.$maxLen.' AND language = "'.$GLOBALS['TL_LANGUAGE'].'"'); */
-			$res = $db->query('SELECT DISTINCT word_transliterated, word FROM tl_search_index WHERE length(word_transliterated) BETWEEN '.$minLen.' AND '.$maxLen.($search_global  ? '' : ' AND language = "'.$GLOBALS['TL_LANGUAGE'].'"'));
+			$res = $db->query('SELECT DISTINCT word_transliterated, word FROM tl_search_index WHERE length(word_transliterated) BETWEEN '.$minLen.' AND '.$maxLen);
 
 			while($word = $res->fetchRow()) {
 

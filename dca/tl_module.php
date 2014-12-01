@@ -11,7 +11,7 @@
  */
 
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['search'] = str_replace ('{config_legend}','{cearchpro_legend},levensthein, maxDist, search_global;{config_legend}', $GLOBALS['TL_DCA']['tl_module']['palettes']['search']);
+$GLOBALS['TL_DCA']['tl_module']['palettes']['search'] = str_replace ('{config_legend}','{cearchpro_legend},levensthein, maxDist;{config_legend}', $GLOBALS['TL_DCA']['tl_module']['palettes']['search']);
 $GLOBALS['TL_DCA']['tl_module']['palettes']['search'] = str_replace ('{reference_legend:hide},rootPage;','{reference_legend:hide},rootPages;', $GLOBALS['TL_DCA']['tl_module']['palettes']['search']);
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['levensthein'] = array(
@@ -20,13 +20,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['levensthein'] = array(
 	'inputType'               => 'checkbox',
 	'eval'                    => array('tl_class'=>'w50 clr'),
 	'sql'                     => "char(1) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['search_global'] = array(
-    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['search_global'],
-    'exclude'                 => true,
-    'inputType'               => 'checkbox',
-    'eval'                    => array('tl_class'=>'w50 clr'),
-    'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['maxDist'] = array(
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['maxDist'],
