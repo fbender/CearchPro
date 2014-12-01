@@ -10,14 +10,15 @@ CearchPro
 * SearchIndexer now also indexes OpenGraph image tags.
 * SearchIndexer saves transliterated Version of all words
 * Shows thumbnail for each search result
-
+* Search in all languages, not only the current selected
+* Add multiple page roots to search for (default is one)
 
 **Works on:**
 Contao > 3.1.5
 
 
 **Tested on:**
-Contao 3.1.5, Contao 3.3.3
+Contao 3.1.5, Contao 3.3.3, Contao 3.4.0
 
 
 **HowTo:**
