@@ -78,15 +78,10 @@ class ModuleSearch extends \Module
             $_GET['per_page'] = \Input::post('per_page');
         }
 
-        // Remove insert tags
-        $strKeywords = trim(\Input::get('keywords'));
-        $strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
+		$blnFuzzy = $this->fuzzy;
+		$strQueryType = \Input::get('query_type') ?: $this->queryType;
 
-        // Overwrite the default query_type
-        if (\Input::get('query_type'))
-        {
-            $this->queryType = \Input::get('query_type');
-        }
+		$strKeywords = trim(\Input::get('keywords'));
 
         $objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
@@ -111,11 +106,11 @@ class ModuleSearch extends \Module
         $this->Template->pagination = '';
         $this->Template->results = '';
 
-        $arrRootpages = deserialize($this->rootPages);
-
         // Execute the search if there are keywords
-        if ($strKeywords != '' && $strKeywords != '*' && !$this->jumpTo)
+        if ($strKeywords != '' && $strKeywords != '*')
         {
+           $arrRootpages = deserialize($this->rootPages);
+
             // Reference page
             if (count($arrRootpages) > 0)
             {
